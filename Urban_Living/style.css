@@ -1,0 +1,205 @@
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { 
+  font-family: 'Helvetica Neue', sans-serif; 
+  background-color: #f2ede6; 
+  color: #2b2b2b; 
+  line-height: 1.5;
+}
+
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(242, 237, 230, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  transition: height 0.3s ease, background 0.3s ease;
+}
+
+.header.scrolled {
+  height: 70px;
+  background: rgba(242, 237, 230, 0.05);
+}
+
+.logo img {
+  padding-top: 20px;
+  height: 200px;
+  width: auto;
+  display: block;
+  transition: height 0.3s ease;
+}
+
+.header.scrolled .logo img {
+  padding-top: 10px;
+  height: 120px;
+}
+
+/* HAMBURGER */
+.hamburger {
+  position: absolute;
+  right: 30px;
+  top: 25px;
+  width: 35px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 2200; /* on top of overlay */
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #2b2b2b; /* dark on header */
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 0.4s ease, opacity 0.4s ease, background 0.4s ease;
+}
+
+.hamburger.active span {
+  background: #fff; /* bright on overlay */
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px,5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px,-5px);
+}
+
+/* OVERLAY MENU */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  right: -260px; /* hidden */
+  width: 260px;
+  height: 100%;
+  background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  transition: right 0.3s ease;
+  z-index: 2150;
+}
+@media (max-width: 768px) {
+  .menu-overlay {
+    width: 50%; /* 70% of screen width */
+    right: -70%; /* hidden initially */
+    padding-top: 80px;
+  }
+}
+
+.menu-overlay.active {
+  right: 0;
+}
+
+.menu-link {
+  color: #eee;
+  text-decoration: none;
+  font-size: 1.3rem;
+  padding: 18px 30px;
+  transition: background 0.2s ease;
+}
+
+.menu-link:hover { background: #2a2a2a; }
+
+/* DIM BACKGROUND */
+#menuDim {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 2140;
+  transition: opacity 0.3s ease;
+}
+
+#menuDim.active {
+  display: block;
+  opacity: 1;
+}
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px 5%;
+  margin-top: 90px; /* space for fixed header */
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .gallery { grid-template-columns: 1fr; }
+}
+
+/* Gallery items */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+  height: 500px;
+}
+
+.gallery-item img.day,
+.gallery-item img.night {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 2px;
+  transition: opacity 0.8s ease, transform 0.5s ease;
+}
+
+.gallery-item img.night {
+  position: absolute;
+  top:0; left:0;
+  opacity: 0;
+}
+
+.gallery-item:hover img.day { opacity: 0; transform: scale(1.05); }
+.gallery-item:hover img.night { opacity: 1; transform: scale(1.05); }
+
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  flex-direction: column;
+}
+
+.lightbox img { max-width: 90%; max-height: 80%; border-radius: 4px; }
+.lightbox .close { position: absolute; top: 20px; right: 30px; color: #eee; font-size: 2rem; cursor: pointer; }
+.nav-buttons { position: absolute; width: 100%; top: 50%; display: flex; justify-content: space-between; padding: 0 40px; transform: translateY(-50%); }
+.nav-buttons span { color: #eee; font-size: 3rem; cursor: pointer; user-select: none; }
+
+/* CONTACT INFO */
+.contact-info {
+  text-align: center;
+  padding: 60px 10%;
+  color: #ccc;
+  background: rgba(0,0,0,0.05);
+}
+
+.contact-info a { color: #fff; text-decoration: none; font-weight: bold; }
