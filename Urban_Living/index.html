@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Urban Living</title>
 <link rel="stylesheet" href="style.css">
-</head>
+</head> 
 <body id="top">
 
 <!-- HEADER -->
@@ -44,14 +44,32 @@
 
   <div id="pageWrapper">
     <!-- All your page content here, including header, gallery, and button -->
-    <a href="apartments.html" class="btn-apartments">Stanovi</a>
+    <a href="#" class="btn-apartments" id="openFloors">Stanovi</a>
   </div>
+
+
+
+  
 
 <!-- CONTACT INFO -->
 <section id="contactInfo" class="contact-info">
   <p>Email: <a href="mailto:sales@sunsetresidences.com">########.com</a></p>
   <p>Phone: <strong>123456789</strong></p>
 </section>
+
+
+<div class="modal" id="floorModal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeModal">&times;</span>
+    <h2>Dostupni Spratovi</h2>
+    <ul class="floor-list">
+      <li>Prvi Sprat</li>
+      <li>Drugi Sprat</li>
+      <li>Treći Sprat</li>
+      <li>Četvrti Sprat</li>
+    </ul>
+  </div>
+</div>
 
 
 <script src="script.js"></script>
