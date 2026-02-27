@@ -25,7 +25,7 @@ body {
 
 .header.scrolled {
   height: 70px;
-  background: rgba(242, 237, 230, 0.05);
+  background:rgba(242, 237, 230, 0.9);
 }
 
 .logo img {
@@ -193,6 +193,46 @@ body {
 .lightbox .close { position: absolute; top: 20px; right: 30px; color: #eee; font-size: 2rem; cursor: pointer; }
 .nav-buttons { position: absolute; width: 100%; top: 50%; display: flex; justify-content: space-between; padding: 0 40px; transform: translateY(-50%); }
 .nav-buttons span { color: #eee; font-size: 3rem; cursor: pointer; user-select: none; }
+
+/* BUTTON STANOVI */
+
+
+
+.btn-apartments {
+  display: block;               /* block element for centering */
+  width: fit-content;           /* shrink to content width */
+  margin: 40px auto;            /* center horizontally */
+  text-align: center;           /* center text inside */
+
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+
+  padding: 16px 36px;           /* comfortable padding */
+  border-radius: 0;             /* sharp edges to match images */
+  border: 2px solid rgba(43,43,43,0.08); /* subtle border for depth */
+  background: #f2ede6;          /* matches your site background */
+  color: #2b2b2b;               /* dark text for contrast */
+  text-decoration: none;        /* remove underline */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* soft shadow for depth */
+  transition: all 0.25s ease;   /* smooth hover */
+}
+
+.btn-apartments:hover {
+  background: #e6ded4;          /* subtle hover color shift */
+  transform: translateY(-3px);  /* gentle lift */
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12); /* slightly stronger shadow */
+  color: #2b2b2b;               /* keep text consistent */
+}
+
+#pageWrapper {
+  opacity: 1;
+  transition: opacity 0.5s ease; /* adjust duration */
+}
+
+#pageWrapper.fade-out {
+  opacity: 0;
+}
 
 /* CONTACT INFO */
 .contact-info {
