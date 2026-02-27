@@ -243,3 +243,18 @@ body {
 }
 
 .contact-info a { color: #fff; text-decoration: none; font-weight: bold; }
+
+
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 32px;
+  color: #eee;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.close-btn:hover {
+  opacity: 0.6;
+}
