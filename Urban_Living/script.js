@@ -43,3 +43,14 @@ window.addEventListener('scroll', () => {
   if(window.scrollY > 50) header.classList.add('scrolled');
   else header.classList.remove('scrolled');
 });
+
+document.querySelectorAll('.btn-apartments').forEach(button => {
+  button.addEventListener('click', function(e) {
+    e.preventDefault(); // stop instant navigation
+    const link = this.getAttribute('href'); // get the target page
+    document.getElementById('pageWrapper').classList.add('fade-out'); // start fade
+    setTimeout(() => {
+      window.location.href = link; // navigate after fade
+    }, 500); // match the CSS transition duration
+  });
+});
