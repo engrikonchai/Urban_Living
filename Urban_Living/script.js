@@ -16,6 +16,31 @@ for (let i = 1; i <= totalImages; i++) {
   gallery.appendChild(galleryItem);
 }
 
+// Mobile tap toggle Day ↔ Night
+document.querySelectorAll('.gallery-item').forEach(item => {
+  item.addEventListener('click', (e) => {
+
+    // Prevent double triggering if needed later
+    e.stopPropagation();
+
+    const dayImg = item.querySelector('.day');
+    const nightImg = item.querySelector('.night');
+
+    const isNightVisible = nightImg.style.opacity === "1";
+
+    if (isNightVisible) {
+      // Switch back to day
+      nightImg.style.opacity = "0";
+      dayImg.style.opacity = "1";
+    } else {
+      // Switch to night
+      nightImg.style.opacity = "1";
+      dayImg.style.opacity = "0";
+    }
+
+  });
+});
+
 
 
 // HAMBURGER MENU
@@ -37,6 +62,14 @@ document.querySelectorAll('.menu-link').forEach(link => {
   });
 });
 
+const closeBtn = document.getElementById('closeBtn');
+
+closeBtn.addEventListener('click', () => {
+  hamburger.classList.remove('active');
+  menuOverlay.classList.remove('active');
+  menuDim.classList.remove('active');
+});
+
 // SHRINK HEADER ON SCROLL
 window.addEventListener('scroll', () => {
   const header = document.querySelector('.header');
@@ -52,5 +85,26 @@ document.querySelectorAll('.btn-apartments').forEach(button => {
     setTimeout(() => {
       window.location.href = link; // navigate after fade
     }, 500); // match the CSS transition duration
+  });
+});
+
+// Floor Filter (append at the end of your existing script.js)
+const floorButtons = document.querySelectorAll('.floor-btn');
+const apartmentCards = document.querySelectorAll('.apartment-card');
+
+floorButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    floorButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const selectedFloor = btn.getAttribute('data-floor');
+
+    apartmentCards.forEach(card => {
+      if (card.getAttribute('data-floor') === selectedFloor) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
   });
 });
