@@ -1,78 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Urban Living</title>
-<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Living</title>
+  <link rel="stylesheet" href="style.css">
 </head> 
 <body id="top">
 
-<!-- HEADER -->
-<header class="header">
-  <div class="logo">
-    <img src="images/urbanlivinglogo.png" alt="Urban Living Logo">
+
+
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <img src="images/urbanlivinglogo.png" alt="Urban Living Logo">
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- OVERLAY MENU -->
+  <div class="menu-overlay" id="menuOverlay">
+    <div class="close-btn" id="closeBtn">&times;</div>
+    <a href="#top" class="menu-link">Pocetna</a>
+    <a href="#contactInfo" class="menu-link">Kontakt</a>
   </div>
 
-  <!-- Hamburger -->
-  <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</header>
+  <div id="menuDim"></div>
 
-<!-- OVERLAY MENU -->
-<div class="menu-overlay" id="menuOverlay">
-  <div class="close-btn" id="closeBtn">&times;</div>
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery"></section>
 
-  <a href="#top" class="menu-link">Main</a>
-  <a href="#contactInfo" class="menu-link">Contact</a>
-  <a href="https://www.instagram.com/pesicparketi" target="_blank" class="menu-link">Instagram</a>
-</div>
-
-<!-- OPTIONAL DIM BACKGROUND -->
-<div id="menuDim"></div>
-
-<!-- GALLERY SECTION -->
-<section class="gallery" id="gallery">
-  <!-- Images will be generated via JS -->
-</section>
-
-<!-- APARTMENTS BUTTON -->
-
+  <!-- STANOVI BUTTON -->
   <div id="pageWrapper">
-    <!-- All your page content here, including header, gallery, and button -->
     <a href="#" class="btn-apartments" id="openFloors">Stanovi</a>
   </div>
 
+  <!-- CONTACT INFO -->
+  <section id="contactInfo" class="contact-info">
+    <p>Email: <a href="mailto:sales@sunsetresidences.com">########.com</a></p>
+    <p>Phone: <strong>123456789</strong></p>
+  </section>
 
-
-  
-
-<!-- CONTACT INFO -->
-<section id="contactInfo" class="contact-info">
-  <p>Email: <a href="mailto:sales@sunsetresidences.com">########.com</a></p>
-  <p>Phone: <strong>123456789</strong></p>
-</section>
-
-
-<div class="modal" id="floorModal">
-  <div class="modal-content">
-    <span class="close-modal" id="closeModal">&times;</span>
-    <ul class="floor-list">
-      <li>Prizemlje</li>
-      <li>Prvi Sprat</li>
-      <li>Drugi Sprat</li>
-      <li>Treći Sprat</li>
-      <li>Četvrti Sprat</li>
-      <li>Peti Sprat</li>
-    </ul>
+  <!-- FLOOR POPUP MODAL -->
+  <div class="modal" id="floorModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <ul class="floor-list">
+        <li data-floor="1">Prizemlje</li>
+        <li data-floor="2">Prvi Sprat</li>
+        <li data-floor="3">Drugi Sprat</li>
+        <li data-floor="4">Treći Sprat</li>
+        <li data-floor="5">Četvrti Sprat</li>
+        <li data-floor="6">Peti Sprat</li>
+      </ul>
+    </div>
   </div>
-</div>
 
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
