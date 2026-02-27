@@ -77,16 +77,6 @@ window.addEventListener('scroll', () => {
   else header.classList.remove('scrolled');
 });
 
-document.querySelectorAll('.btn-apartments').forEach(button => {
-  button.addEventListener('click', function(e) {
-    e.preventDefault(); // stop instant navigation
-    const link = this.getAttribute('href'); // get the target page
-    document.getElementById('pageWrapper').classList.add('fade-out'); // start fade
-    setTimeout(() => {
-      window.location.href = link; // navigate after fade
-    }, 500); // match the CSS transition duration
-  });
-});
 
 // Floor Filter (append at the end of your existing script.js)
 const floorButtons = document.querySelectorAll('.floor-btn');
@@ -108,3 +98,23 @@ floorButtons.forEach(btn => {
     });
   });
 });
+
+const modal = document.getElementById('floorModal');
+const openBtn = document.getElementById('openFloors');
+const closeModalBtn = document.getElementById('closeModal');
+
+openBtn.addEventListener('click', function(e) {
+  e.preventDefault();
+  modal.classList.add('active');
+});
+
+closeModalBtn.addEventListener('click', function() {
+  modal.classList.remove('active');
+});
+
+modal.addEventListener('click', function(e) {
+  if (e.target === modal) {
+    modal.classList.remove('active');
+  }
+});
+
