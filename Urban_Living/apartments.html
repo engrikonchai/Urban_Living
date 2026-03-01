@@ -413,25 +413,42 @@
     <p>Phone: <strong>+123 123 123 123</strong></p>
   </section>
 
+
+
   <script src="script.js"></script>
   <script>
+
     // ── LIGHTBOX ──
-    document.querySelectorAll('.floor-gallery img').forEach(img => {
-      img.addEventListener('click', () => {
-        const lb = document.createElement('div');
-        lb.className = 'lightbox';
-        lb.innerHTML = `
-          <span class="lightbox-close">&times;</span>
-          <img src="${img.src}" alt="${img.alt}">
-          <span class="lightbox-hint">Kliknite bilo gdje za zatvaranje</span>
-        `;
-        document.body.appendChild(lb);
-        document.body.style.overflow = 'hidden';
-        const close = () => { document.body.removeChild(lb); document.body.style.overflow = ''; };
-        lb.addEventListener('click', close);
-        lb.querySelector('.lightbox-close').addEventListener('click', e => { e.stopPropagation(); close(); });
-      });
+document.querySelectorAll('.floor-gallery img').forEach(img => {
+  img.addEventListener('click', () => {
+    // Create lightbox
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.innerHTML = `
+      <img src="${img.src}" alt="${img.alt}">
+      <span class="lightbox-hint">Kliknite bilo gdje za zatvaranje</span>
+    `;
+    document.body.appendChild(lb);
+
+    // Disable page scroll
+    document.body.style.overflow = 'hidden';
+
+    // Function to close lightbox
+    const close = () => {
+      document.body.removeChild(lb);
+      document.body.style.overflow = ''; // restore scroll
+    };
+
+    // Close lightbox when clicking anywhere
+    lb.addEventListener('click', close);
+
+    // Close lightbox when clicking the close button
+    lb.querySelector('.lightbox-close').addEventListener('click', e => {
+      e.stopPropagation(); // prevent outer click from firing
+      close();
     });
+  });
+});
 
     // ── STICKY NAV — highlight closest floor only ──
     const navLinks      = document.querySelectorAll('.floor-nav a');
