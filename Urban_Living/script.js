@@ -2,7 +2,7 @@
 const bodyId = document.body.id;
 
 // --- GALLERY (only on main page) ---
-if(bodyId === 'top') {
+if (bodyId === 'top') {
   const gallery = document.getElementById('gallery');
   const totalImages = 8;
 
@@ -10,7 +10,7 @@ if(bodyId === 'top') {
     const galleryItem = document.createElement('div');
     galleryItem.className = 'gallery-item';
     galleryItem.innerHTML = `
-      <img class="day" src="images/R${i}.jpg" alt="R${i} Day">
+      <img class="day"   src="images/R${i}.jpg"  alt="R${i} Day">
       <img class="night" src="images/R${i}N.jpg" alt="R${i} Night">
     `;
     gallery.appendChild(galleryItem);
@@ -19,85 +19,98 @@ if(bodyId === 'top') {
   // Mobile tap toggle Day ↔ Night
   document.querySelectorAll('.gallery-item').forEach(item => {
     item.addEventListener('click', () => {
-      const dayImg = item.querySelector('.day');
       const nightImg = item.querySelector('.night');
-      if (nightImg.style.opacity === "1") {
-        nightImg.style.opacity = "0";
-        dayImg.style.opacity = "1";
+      const dayImg   = item.querySelector('.day');
+      if (nightImg.style.opacity === '1') {
+        nightImg.style.opacity = '0';
+        dayImg.style.opacity   = '1';
       } else {
-        nightImg.style.opacity = "1";
-        dayImg.style.opacity = "0";
+        nightImg.style.opacity = '1';
+        dayImg.style.opacity   = '0';
       }
     });
   });
 }
 
-// --- HAMBURGER MENU (works on both pages) ---
-const hamburger = document.getElementById('hamburger');
+// --- HAMBURGER MENU ---
+// The hamburger is now the ONLY toggle — it opens AND closes the menu.
+// No separate close-btn required.
+const hamburger   = document.getElementById('hamburger');
 const menuOverlay = document.getElementById('menuOverlay');
-const menuDim = document.getElementById('menuDim');
-const closeBtn = document.getElementById('closeBtn');
+const menuDim     = document.getElementById('menuDim');
 
-if(hamburger && menuOverlay && menuDim) {
+function openMenu() {
+  hamburger.classList.add('active');
+  menuOverlay.classList.add('active');
+  menuDim.classList.add('active');
+  document.body.style.overflow = 'hidden'; // prevent bg scroll
+}
+
+function closeMenu() {
+  hamburger.classList.remove('active');
+  menuOverlay.classList.remove('active');
+  menuDim.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+if (hamburger && menuOverlay && menuDim) {
+  // Toggle on hamburger click
   hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    menuOverlay.classList.toggle('active');
-    menuDim.classList.toggle('active');
+    hamburger.classList.contains('active') ? closeMenu() : openMenu();
   });
-  closeBtn.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    menuOverlay.classList.remove('active');
-    menuDim.classList.remove('active');
-  });
+
+  // Close when clicking the dim overlay
+  menuDim.addEventListener('click', closeMenu);
+
+  // Close when any menu link is clicked
   document.querySelectorAll('.menu-link').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      menuOverlay.classList.remove('active');
-      menuDim.classList.remove('active');
-    });
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
   });
 }
 
-// --- SHRINK HEADER ---
+// --- SHRINK HEADER ON SCROLL ---
 window.addEventListener('scroll', () => {
   const header = document.querySelector('.header');
-  if(header) {
-    if(window.scrollY > 50) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
+  if (header) {
+    header.classList.toggle('scrolled', window.scrollY > 50);
   }
 });
 
 // --- STANOVI POPUP (only on main page) ---
-if(bodyId === 'top') {
-  const floorModal = document.getElementById('floorModal');
+if (bodyId === 'top') {
+  const floorModal    = document.getElementById('floorModal');
   const openFloorsBtn = document.getElementById('openFloors');
   const closeModalBtn = document.getElementById('closeModal');
-  const floorListItems = document.querySelectorAll('.floor-list li');
+  const menuStanovi   = document.getElementById('menuStanovi');
+  const floorItems    = document.querySelectorAll('.floor-list li');
 
-  if(openFloorsBtn) {
-    openFloorsBtn.addEventListener('click', e => {
-      e.preventDefault();
-      floorModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
+  function openModal() {
+    floorModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
-  if(closeModalBtn) {
-    closeModalBtn.addEventListener('click', () => {
-      floorModal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    });
+  function closeModal() {
+    floorModal.classList.remove('active');
+    document.body.style.overflow = '';
   }
-  if(floorModal) {
+
+  if (openFloorsBtn) openFloorsBtn.addEventListener('click', e => { e.preventDefault(); openModal(); });
+  if (menuStanovi)   menuStanovi.addEventListener('click',   e => { e.preventDefault(); openModal(); });
+  if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+
+  // Close modal on backdrop click
+  if (floorModal) {
     floorModal.addEventListener('click', e => {
-      if(e.target === floorModal) {
-        floorModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
+      if (e.target === floorModal) closeModal();
     });
   }
 
-  // Floor click → go to apartments.html#floorX
-  floorListItems.forEach(item => {
+  // Floor click → navigate to apartments page
+  floorItems.forEach(item => {
     item.addEventListener('click', () => {
       const floor = item.getAttribute('data-floor');
       window.location.href = `apartments.html#floor${floor}`;
@@ -105,12 +118,19 @@ if(bodyId === 'top') {
   });
 }
 
-// --- SMOOTH SCROLL ON APARTMENTS PAGE ---
-if(bodyId === 'apartments') {
+// --- APARTMENTS PAGE ---
+if (bodyId === 'apartments') {
+  // Smooth scroll to hash on load
   window.addEventListener('DOMContentLoaded', () => {
-    if(window.location.hash) {
+    if (window.location.hash) {
       const target = document.querySelector(window.location.hash);
-      if(target) target.scrollIntoView({ behavior: 'smooth' });
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
     }
   });
+
+  // Mark Stanovi as active in menu
+  document.querySelectorAll('.menu-link').forEach(link => {
+    if (link.textContent.trim() === 'Stanovi') link.classList.add('active');
+  });
 }
+
